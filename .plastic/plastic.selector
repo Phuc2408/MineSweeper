@@ -1,0 +1,4 @@
+repository "Minesweeper@phamphuc240804@cloud"
+  path "/"
+    br "/main"
+    co "/main"

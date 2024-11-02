@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\BigO\\Bai-tap-Code\\C#\\Minesweeper\\Unity\\Minesweeper\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B001919C-18A3-D42C-2F2B-CCCDB9C9BB1A}|Assembly-CSharp.csproj|f:\\bigo\\bai-tap-code\\c#\\minesweeper\\unity\\minesweeper\\assets\\scripts\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B001919C-18A3-D42C-2F2B-CCCDB9C9BB1A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B001919C-18A3-D42C-2F2B-CCCDB9C9BB1A}|Assembly-CSharp.csproj|f:\\bigo\\bai-tap-code\\c#\\minesweeper\\unity\\minesweeper\\assets\\scripts\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B001919C-18A3-D42C-2F2B-CCCDB9C9BB1A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B001919C-18A3-D42C-2F2B-CCCDB9C9BB1A}|Assembly-CSharp.csproj|F:\\BigO\\Bai-tap-Code\\C#\\Minesweeper\\Unity\\Minesweeper\\assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B001919C-18A3-D42C-2F2B-CCCDB9C9BB1A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Game.cs",
+              "DocumentMoniker": "F:\\BigO\\Bai-tap-Code\\C#\\Minesweeper\\Unity\\Minesweeper\\Assets\\Scripts\\Game.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game.cs",
+              "ToolTip": "F:\\BigO\\Bai-tap-Code\\C#\\Minesweeper\\Unity\\Minesweeper\\Assets\\Scripts\\Game.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAgwCcAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T01:42:05.988Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Board.cs",
+              "DocumentMoniker": "F:\\BigO\\Bai-tap-Code\\C#\\Minesweeper\\Unity\\Minesweeper\\Assets\\Scripts\\Board.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Board.cs",
+              "ToolTip": "F:\\BigO\\Bai-tap-Code\\C#\\Minesweeper\\Unity\\Minesweeper\\Assets\\Scripts\\Board.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Board.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwCQAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T01:38:08.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Cell.cs",
+              "DocumentMoniker": "F:\\BigO\\Bai-tap-Code\\C#\\Minesweeper\\Unity\\Minesweeper\\Assets\\Scripts\\Cell.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Cell.cs",
+              "ToolTip": "F:\\BigO\\Bai-tap-Code\\C#\\Minesweeper\\Unity\\Minesweeper\\Assets\\Scripts\\Cell.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Cell.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T01:29:26.291Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
