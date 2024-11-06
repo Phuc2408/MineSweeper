@@ -4,6 +4,7 @@ public struct Cell
 {
     public enum Type
     {
+        Invalid,
         Empty,
         Mine,
         Number,
@@ -12,7 +13,7 @@ public struct Cell
     public Vector3Int position;
     public Type type;
     public int number;
-    public bool revealed;
+    public float revealed;
     public bool flagged;
     public bool exploded;
 }

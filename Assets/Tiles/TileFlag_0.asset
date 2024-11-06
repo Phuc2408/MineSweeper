@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: TileFlag_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 8555603525003148160, guid: 590db3b48b257cf4dbccbb6a8c8b3690, type: 3}
+  m_Sprite: {fileID: 8555603525003148160, guid: 03374293005df7449955545105dfd081, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
