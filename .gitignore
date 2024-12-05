@@ -18,3 +18,4 @@ MemoryCaptures/
 *.svd
 .plastic/*
 .vs/*
+.Library/*

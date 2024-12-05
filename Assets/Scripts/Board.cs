@@ -39,8 +39,6 @@ public class Board : MonoBehaviour
         GenerateCells();
         GenerateMines(mineNumber);
         GenerateNumbers();
-
-        Camera.main.transform.position = new Vector3(width / 2f, height / 2f, -10f);
         Draw();
     }
     private bool IsValid(int x, int y)
@@ -64,30 +62,27 @@ public class Board : MonoBehaviour
     {
         state[x, y] = cell;
     }
-    private BoardResult CheckWinCondition()
+
+    public BoardResult CheckWinCondition()
     {
         int width = state.GetLength(0);
         int height = state.GetLength(1);
-        // 
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 Cell cell = state[x, y];
-                if (cell.type != Cell.Type.Mine && cell.revealed == 1) return BoardResult.RUNNING;
+
+                if (cell.type != Cell.Type.Mine && cell.revealed == 0)
+                    return BoardResult.RUNNING;
             }
         }
-        
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                Cell cell = state[x, y];
-                if (cell.type == Cell.Type.Mine && cell.flagged == false) return BoardResult.RUNNING;
-            }
-        }
+
         return BoardResult.WIN;
     }
+
+
     public BoardResult Reveal(int x, int y)
     {
         Cell cell = state[x, y];
@@ -104,6 +99,9 @@ public class Board : MonoBehaviour
         state[x,y].revealed = 0.5f;
         return CheckWinCondition();
     }
+
+    
+
     private void Explode(int x, int y)
     {
         int width = state.GetLength(0);
@@ -145,6 +143,7 @@ public class Board : MonoBehaviour
                 if (cell.type == Cell.Type.Mine)
                 {
                     cell.revealed = 1;
+                    cell.exploded = true;
                     state[x, y] = cell;                }
             }
         }
@@ -161,7 +160,11 @@ public class Board : MonoBehaviour
             Flood(x - 1, y);
             Flood(x + 1, y);
             Flood(x, y - 1);
+            Flood(x, y + 1);
+            Flood(x + 1, y + 1);
+            Flood(x + 1, y - 1);
             Flood(x - 1, y + 1);
+            Flood(x - 1, y - 1);
         }
     }
     private void GenerateCells()
@@ -191,8 +194,8 @@ public class Board : MonoBehaviour
                 int y = Random.Range(0, height);
                 if(state[x, y].type != Cell.Type.Mine) {
                     state[x, y].type = Cell.Type.Mine;
-                break;
-        }
+                    break;
+                }
             }
         }
     }
@@ -298,5 +301,19 @@ public class Board : MonoBehaviour
             case 8: return tileNum8;
             default: return null;
         }
+    }
+    public void showUnRevealedCell()
+    {
+        do
+        {
+            int x = Random.Range(0, state.GetLength(0));
+            int y = Random.Range(0, state.GetLength(1));
+            Cell predict = state[x, y];
+            if (predict.type != Cell.Type.Mine && predict.revealed == 0)
+            {
+                Flood(x, y);
+                return;
+            }    
+        } while (true);
     }
 }
