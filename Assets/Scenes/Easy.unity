@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 138499441}
   - component: {fileID: 138499443}
   - component: {fileID: 138499442}
-  - component: {fileID: 138499444}
+  - component: {fileID: 138499447}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -147,10 +147,11 @@ Transform:
   m_GameObject: {fileID: 138499440}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -270, y: -135.0673, z: 0}
-  m_LocalScale: {x: 34.25493, y: 32.54196, z: 1}
+  m_LocalPosition: {x: -299.5002, y: -153.3777, z: 0}
+  m_LocalScale: {x: 38.83065, y: 38.39134, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1981880631}
   m_Father: {fileID: 1734168505}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &138499442
@@ -243,7 +244,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &138499444
+--- !u!114 &138499447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,20 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61c55bfa9412ca46bee34e46e82add3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileUnknown: {fileID: 11400000, guid: fe30070edb4f2d241a94da7193950ba5, type: 2}
-  tileUnknownHaftOpacity: {fileID: 11400000, guid: 371fe2229a9918344a6a92ff53104baf, type: 2}
-  tileEmpty: {fileID: 11400000, guid: 03d1dd9e06819d740b34987bf2ca6e2a, type: 2}
-  tileMine: {fileID: 11400000, guid: 89669986d5fb5d44e8699f610c2ccc1e, type: 2}
-  tileExploded: {fileID: 11400000, guid: ec935bb431875ae45be81f99279d24c0, type: 2}
-  tileFlag: {fileID: 11400000, guid: ff2e2b93b07014c4d9e139b423d6d9c1, type: 2}
-  tileNum1: {fileID: 11400000, guid: 08bdc61fa090bda428df17f73b845128, type: 2}
-  tileNum2: {fileID: 11400000, guid: 4580e32acbdb4824c98fe40d1d827d54, type: 2}
-  tileNum3: {fileID: 11400000, guid: 8c399576dfada424e8b5a13553f5b4c0, type: 2}
-  tileNum4: {fileID: 11400000, guid: 5f905faf888e82648a3e951140e0bc90, type: 2}
-  tileNum5: {fileID: 11400000, guid: 2364837320a13a341b0b4d37d7800dd1, type: 2}
-  tileNum6: {fileID: 11400000, guid: eb8b84b138db94d4ab41a825402b065c, type: 2}
-  tileNum7: {fileID: 11400000, guid: 6864da5a828fee248a2e4f13b3a0f735, type: 2}
-  tileNum8: {fileID: 11400000, guid: ca6bf4b5272b6484d89a1c87de6daa4b, type: 2}
+  cellPrefab: {fileID: 1981880630}
 --- !u!1 &321291866
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 730, y: 241}
+  m_AnchoredPosition: {x: 721, y: 284}
   m_SizeDelta: {x: 90.436, y: 90.945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &321291868
@@ -556,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &342303476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,7 +871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5802246461292651044, guid: 4d3e402e586436e4398cdfe195811ea2, type: 3}
+  m_Sprite: {fileID: 8121749611574206679, guid: 36d7438af808da748a21c98726af6c2e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3427,6 +3415,79 @@ MonoBehaviour:
   timePlayed: {fileID: 609555352}
   timeBest: {fileID: 0}
   saveBestResult: {fileID: 0}
+--- !u!1 &1981880630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1981880631}
+  - component: {fileID: 1981880636}
+  - component: {fileID: 1981880637}
+  m_Layer: 0
+  m_Name: cellPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1981880631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981880630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 138499441}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1981880636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981880630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b806f0eadb74bc142aa92a34ac182f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  flagged: 0
+--- !u!114 &1981880637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981880630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900525dc43497c84c83b5047352f50a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileUnknown: {fileID: 11400000, guid: fe30070edb4f2d241a94da7193950ba5, type: 2}
+  tileUnknownHaftOpacity: {fileID: 11400000, guid: 371fe2229a9918344a6a92ff53104baf, type: 2}
+  tileFlag: {fileID: 11400000, guid: ff2e2b93b07014c4d9e139b423d6d9c1, type: 2}
+  tileMine: {fileID: 11400000, guid: 89669986d5fb5d44e8699f610c2ccc1e, type: 2}
+  tileExploded: {fileID: 11400000, guid: ec935bb431875ae45be81f99279d24c0, type: 2}
+  tileEmpty: {fileID: 11400000, guid: 03d1dd9e06819d740b34987bf2ca6e2a, type: 2}
+  tileNum1: {fileID: 11400000, guid: 08bdc61fa090bda428df17f73b845128, type: 2}
+  tileNum2: {fileID: 11400000, guid: 4580e32acbdb4824c98fe40d1d827d54, type: 2}
+  tileNum3: {fileID: 11400000, guid: 8c399576dfada424e8b5a13553f5b4c0, type: 2}
+  tileNum4: {fileID: 11400000, guid: 5f905faf888e82648a3e951140e0bc90, type: 2}
+  tileNum5: {fileID: 11400000, guid: 2364837320a13a341b0b4d37d7800dd1, type: 2}
+  tileNum6: {fileID: 11400000, guid: eb8b84b138db94d4ab41a825402b065c, type: 2}
+  tileNum7: {fileID: 11400000, guid: 6864da5a828fee248a2e4f13b3a0f735, type: 2}
+  tileNum8: {fileID: 11400000, guid: ca6bf4b5272b6484d89a1c87de6daa4b, type: 2}
 --- !u!1 &2052025880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3563,7 +3624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 796.44, y: 254}
+  m_AnchoredPosition: {x: 796.44, y: 302}
   m_SizeDelta: {x: 327.121, y: 164.784}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2052025884

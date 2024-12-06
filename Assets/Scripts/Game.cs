@@ -53,8 +53,8 @@ public class Game : MonoBehaviour
         {
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int cellPosition = board.tilemap.WorldToCell(worldPosition);
-            Cell cell = board.getCell(cellPosition.x, cellPosition.y);
-            if (cell.type == Cell.Type.Invalid || cell.revealed == 1 || cell.flagged) return;
+            Cell cell = board.GetCell(cellPosition.x, cellPosition.y);
+            if (cell.isRevealed() == 1.0f || cell.flagged) return;
             Board.BoardResult result = board.Reveal(cellPosition.x, cellPosition.y);
             board.Draw();
             checkWinCondition(result);
@@ -91,9 +91,9 @@ public class Game : MonoBehaviour
     {
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPosition = board.tilemap.WorldToCell(worldPosition);
-        Cell cell = board.getCell(cellPosition.x, cellPosition.y);
+        Cell cell = board.GetCell(cellPosition.x, cellPosition.y);
 
-        if (cell.type == Cell.Type.Invalid || cell.revealed == 1) {
+        if (cell.isRevealed() == 1.0f) {
             return;
         }
 
