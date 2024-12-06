@@ -10,22 +10,8 @@ public class Board : MonoBehaviour
         RUNNING,
         WIN
     }
+    public GameObject cellPrefab;  // A prefab for cells (empty GameObject)
     public Tilemap tilemap { get; private set; }
-
-    public Tile tileUnknown;
-    public Tile tileUnknownHaftOpacity;
-    public Tile tileEmpty;
-    public Tile tileMine;
-    public Tile tileExploded;
-    public Tile tileFlag;
-    public Tile tileNum1;
-    public Tile tileNum2;
-    public Tile tileNum3;
-    public Tile tileNum4;
-    public Tile tileNum5;
-    public Tile tileNum6;
-    public Tile tileNum7;
-    public Tile tileNum8;
     private Cell[,] state;
     private void Awake()
     {
@@ -39,8 +25,6 @@ public class Board : MonoBehaviour
         GenerateCells();
         GenerateMines(mineNumber);
         GenerateNumbers();
-
-        Camera.main.transform.position = new Vector3(width / 2f, height / 2f, -10f);
         Draw();
     }
     private bool IsValid(int x, int y)
@@ -49,69 +33,56 @@ public class Board : MonoBehaviour
         int height = state.GetLength(1);
         return x >= 0 && x < width && y >= 0 && y < height;
     }
-    public Cell getCell(int x, int y)
-    {
-        if (IsValid(x, y))
-        {
-            return state[x, y];
-        }
-        else
-        {
-            return new Cell();
-        }
-    }
     public void setCell(int x, int y, Cell cell)
     {
         state[x, y] = cell;
     }
-    private BoardResult CheckWinCondition()
+
+    public BoardResult CheckWinCondition()
     {
         int width = state.GetLength(0);
         int height = state.GetLength(1);
-        // 
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 Cell cell = state[x, y];
-                if (cell.type != Cell.Type.Mine && cell.revealed == 1) return BoardResult.RUNNING;
+
+                if (cell.getType() != Cell.Type.Mine && cell.isRevealed() == 0)
+                    return BoardResult.RUNNING;
             }
         }
-        
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                Cell cell = state[x, y];
-                if (cell.type == Cell.Type.Mine && cell.flagged == false) return BoardResult.RUNNING;
-            }
-        }
+
         return BoardResult.WIN;
     }
+
+
     public BoardResult Reveal(int x, int y)
     {
         Cell cell = state[x, y];
-        if(cell.type == Cell.Type.Mine)
+        if(cell.getType() == Cell.Type.Mine)
         {
             Explode(x, y);
             return BoardResult.OVER;
         }
-        if(cell.type == Cell.Type.Empty)
+        if(cell.getType() == Cell.Type.Empty)
         {
             Flood(x, y);
             return CheckWinCondition();
         }
-        state[x,y].revealed = 0.5f;
+        state[x, y].setRevealed(0.5f);
         return CheckWinCondition();
     }
+
+    
+
     private void Explode(int x, int y)
     {
         int width = state.GetLength(0);
         int height = state.GetLength(1);
-        Cell cell = state[x, y];
-        cell.revealed = 1;
-        cell.exploded = true;
-        state[x, y] = cell;
+        state[x, y].setRevealed(1.0f);
+        (state[x, y] as MineCell).isExploded = true;
         showAllBomb();
     }
     private IEnumerator endRevealing()
@@ -124,9 +95,9 @@ public class Board : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Cell cell = state[x, y];
-                if (cell.revealed == 0.5f)
+                if (cell.isRevealed() == 0.5f)
                 {
-                    cell.revealed = 1;
+                    cell.setRevealed(1.0f);
                     state[x, y] = cell;
                 }
             }
@@ -142,9 +113,10 @@ public class Board : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Cell cell = state[x, y];
-                if (cell.type == Cell.Type.Mine)
+                if (cell.getType() == Cell.Type.Mine)
                 {
-                    cell.revealed = 1;
+                    cell.setRevealed(1.0f);
+                    (cell as MineCell).isExploded = true;
                     state[x, y] = cell;                }
             }
         }
@@ -152,17 +124,27 @@ public class Board : MonoBehaviour
     private void Flood(int x, int y)
     {
         if (!IsValid(x, y)) return;
+        if (state[x, y].flagged)
+            return;
         Cell cell = state[x, y];
-        if (cell.revealed != 0) return;
-        if (cell.type == Cell.Type.Mine || cell.type == Cell.Type.Invalid) return;
-        state[x, y].revealed = 0.5f;
-        if (cell.type == Cell.Type.Empty)
+        if (state[x, y].isRevealed() != 0) return;
+        if (state[x, y].getType() == Cell.Type.Mine) return;
+        state[x, y].setRevealed(0.5f);
+        if (state[x, y].getType() == Cell.Type.Empty)
         {
             Flood(x - 1, y);
             Flood(x + 1, y);
             Flood(x, y - 1);
+            Flood(x, y + 1);
+            Flood(x + 1, y + 1);
+            Flood(x + 1, y - 1);
             Flood(x - 1, y + 1);
+            Flood(x - 1, y - 1);
         }
+    }
+    public Cell GetCell(int x, int y)
+    {
+        return state[x, y];
     }
     private void GenerateCells()
     {
@@ -172,9 +154,9 @@ public class Board : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                Cell cell = new Cell();
+                GameObject cellObj = Instantiate(cellPrefab); // Create a new GameObject
+                Cell cell = cellObj.AddComponent<EmptyCell>();
                 cell.position = new Vector3Int(x, y, 0);
-                cell.type = Cell.Type.Empty;
                 state[x, y] = cell;
             }
         }
@@ -189,10 +171,13 @@ public class Board : MonoBehaviour
             {
                 int x = Random.Range(0, width);
                 int y = Random.Range(0, height);
-                if(state[x, y].type != Cell.Type.Mine) {
-                    state[x, y].type = Cell.Type.Mine;
-                break;
-        }
+                if(state[x, y].getType() != Cell.Type.Mine) {
+                    GameObject cellObj = Instantiate(cellPrefab); // Create a new GameObject
+                    Cell cell = cellObj.AddComponent<MineCell>();
+                    cell.position = new Vector3Int(x, y, 0);
+                    state[x, y] = cell;
+                    break;
+                }
             }
         }
     }
@@ -204,18 +189,17 @@ public class Board : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                Cell cell = state[x, y];
-                if (cell.type == Cell.Type.Mine)
-                {
+                if (state[x, y].getType() == Cell.Type.Mine)
                     continue;
-                }
-                cell.number = CountMines(x, y);
-                if (cell.number > 0)
+                int number = CountMines(x, y);
+                if (number > 0)
                 {
-                    cell.type = Cell.Type.Number;
-                }
-                state[x, y] = cell;
-            }
+                    GameObject cellObj = Instantiate(cellPrefab); // Create a new GameObject
+                    Cell cell = cellObj.AddComponent<NumberCell>();
+                    (cell as NumberCell).number = number;
+                    cell.position = new Vector3Int(x, y, 0);
+                    state[x, y] = cell;
+                }            }
         }
     }
     private int CountMines(int x, int y)
@@ -233,7 +217,7 @@ public class Board : MonoBehaviour
                 int nx = x + dx;
                 int ny = y + dy;
 
-                if (nx >= 0 && nx < width && ny >= 0 && ny < height && state[nx, ny].type == Cell.Type.Mine)
+                if (nx >= 0 && nx < width && ny >= 0 && ny < height && state[nx, ny].getType() == Cell.Type.Mine)
                     mineCount++;
             }
         }
@@ -250,53 +234,23 @@ public class Board : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Cell cell = state[x, y];
-                tilemap.SetTile(cell.position, GetTile(cell));
+                tilemap.SetTile(cell.position, cell.GetTile());
             }
         }
         StartCoroutine(endRevealing());
     }
-
-    private Tile GetTile(Cell cell)
+    public void showUnRevealedCell()
     {
-        if (cell.revealed == 0.5f) return tileUnknownHaftOpacity;
-        if (cell.revealed == 1)
+        do
         {
-            return GetRevealedTile(cell);
-        }
-        else if (cell.flagged)
-        {
-            return tileFlag;
-        }
-        else
-        {
-            return tileUnknown;
-        }
-    }
-
-    private Tile GetRevealedTile(Cell cell)
-    {
-        switch (cell.type)
-        {
-            case Cell.Type.Empty: return tileEmpty;
-            case Cell.Type.Mine: return cell.exploded ? tileExploded : tileMine;
-            case Cell.Type.Number: return GetNumberTile(cell);
-            default: return null;
-        }
-    }
-
-    private Tile GetNumberTile(Cell cell)
-    {
-        switch (cell.number)
-        {
-            case 1: return tileNum1;
-            case 2: return tileNum2;
-            case 3: return tileNum3;
-            case 4: return tileNum4;
-            case 5: return tileNum5;
-            case 6: return tileNum6;
-            case 7: return tileNum7;
-            case 8: return tileNum8;
-            default: return null;
-        }
+            int x = Random.Range(0, state.GetLength(0));
+            int y = Random.Range(0, state.GetLength(1));
+            Cell predict = state[x, y];
+            if (predict.getType() != Cell.Type.Mine && predict.isRevealed() == 0)
+            {
+                Flood(x, y);
+                return;
+            }    
+        } while (true);
     }
 }
