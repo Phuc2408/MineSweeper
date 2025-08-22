@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Minesweeper.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Menu.unity
+    guid: e4d168a5b556f484dbc0274bccd585d6
+  - enabled: 1
+    path: Assets/Scenes/Difficulty.unity
+    guid: a09e06f631e57d047af4cc7c834abbaa
+  - enabled: 1
+    path: Assets/Scenes/Easy.unity
+    guid: 7b93078c932efdc4484aa43b7ad93537
+  - enabled: 1
+    path: Assets/Scenes/Medium.unity
+    guid: b5edabee6731d394e8e958f3cf21c013
+  - enabled: 1
+    path: Assets/Scenes/Hard.unity
+    guid: f1884d9bf5a54c646b772a59ce941f46
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
